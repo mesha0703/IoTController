@@ -18,8 +18,10 @@
 #define DEBOUNCE_TIME_MS 50 // Debounce time in milliseconds
 #define ESP_INTR_FLAG_DEFAULT 0
 
+#define CLASSIC_BLUETOOTH
+
 //uint8_t DEST_MAC[6] = { 0xC8, 0xC9, 0xA3, 0xD0, 0xE9, 0xE8 };
-uint8_t DEST_MAC[6] = { 0xC8, 0xC9, 0xA3, 0xD0, 0xE9, 0xE8 };
+uint8_t DEST_MAC[6] = { 0x78, 0x21, 0x84, 0x9D, 0x75, 0xEC };
 uint8_t BROADCAST_MAC[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 
 static QueueHandle_t gpio_evt_queue = NULL;
@@ -52,6 +54,7 @@ static void gpio_task(void* arg) {
 				.L_left = gpio_get_level(LEFT_BTN),
 				.L_right = gpio_get_level(RIGHT_BTN),
 				.start_btn = gpio_get_level(START_BTN),
+				.select_btn = gpio_get_level(SELECT_BTN),
 			};
 			
 			// check if the data has changed. If not, skip sending.
@@ -69,6 +72,7 @@ static void gpio_task(void* arg) {
 				gamepad_data.L_left = new_gamepad_data.L_left;
 				gamepad_data.L_right = new_gamepad_data.L_right;
 				gamepad_data.start_btn = new_gamepad_data.start_btn;
+				gamepad_data.select_btn = new_gamepad_data.select_btn;
 				
 				send_gamepad_data(); // Send the GPIO state over ESP-NOW
 				
@@ -90,7 +94,7 @@ void init_gamepad_gpios(void) {
     io_conf.intr_type = GPIO_INTR_ANYEDGE;
     // Bit mask of the pins
     io_conf.pin_bit_mask =	(1ULL<<UP_BTN) | (1ULL<<DOWN_BTN) | (1ULL<<LEFT_BTN) | (1ULL<<RIGHT_BTN) | \
-    						(1ULL<<START_BTN);
+    						(1ULL<<START_BTN) | (1ULL<<SELECT_BTN);
     io_conf.mode = GPIO_MODE_INPUT;
     io_conf.pull_down_en = 1;
     gpio_config(&io_conf);
@@ -106,4 +110,5 @@ void init_gamepad_gpios(void) {
     gpio_isr_handler_add(LEFT_BTN, gpio_isr_handler, (void*) LEFT_BTN);	
     gpio_isr_handler_add(RIGHT_BTN, gpio_isr_handler, (void*) RIGHT_BTN);
     gpio_isr_handler_add(START_BTN, gpio_isr_handler, (void*) START_BTN);
+    gpio_isr_handler_add(SELECT_BTN, gpio_isr_handler, (void*) SELECT_BTN);
 }

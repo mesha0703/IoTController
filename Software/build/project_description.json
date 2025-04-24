@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "main",
-    "project_version":    "feb53d4",
+    "project_version":    "4caa652-dirty",
     "project_path":       "/Users/meho.kitovnica/Desktop/Projekte/IoTController/Software",
     "idf_path":           "/Users/meho.kitovnica/ESP-IDF/esp-idf-v5.3.1",
     "build_dir":          "/Users/meho.kitovnica/Desktop/Projekte/IoTController/Software/build",

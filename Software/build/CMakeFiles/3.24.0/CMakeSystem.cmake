@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Darwin-24.1.0")
+set(CMAKE_HOST_SYSTEM "Darwin-24.3.0")
 set(CMAKE_HOST_SYSTEM_NAME "Darwin")
-set(CMAKE_HOST_SYSTEM_VERSION "24.1.0")
+set(CMAKE_HOST_SYSTEM_VERSION "24.3.0")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/Users/meho.kitovnica/ESP-IDF/esp-idf-v5.3.1/tools/cmake/toolchain-esp32s3.cmake")

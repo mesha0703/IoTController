@@ -10,6 +10,7 @@
 #define RIGHT_BTN 46
 
 #define START_BTN 3
+#define SELECT_BTN 18
 
 extern uint8_t DEST_MAC[6];
 extern uint8_t BROADCAST_MAC[6];
@@ -37,6 +38,8 @@ typedef struct {
   	bool R_joystick_btn;
 	
 } gamepad_data_t;
+
+extern gamepad_data_t gamepad_data;
 
 void init_gamepad_gpios(void);
 
